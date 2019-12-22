@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% block title %}
+  Home
+{% endblock %}
+{% block content %}
+<div class="container" style='background-color: whitesmoke;'>
+<div class="row" style='padding :30px'>
+  <div class="mb-3 mx-auto">
+    {% if wall_list %}
+    {% for wall in wall_list%}
+      <div class="card text-center" style='max-width: 450px;margin: 10px;'>
+        <span> Author {{wall.author}}</span>
+            <div class="card-body">
+              {% if wall.image %}
+                <img src="{{wall.image.url}}" alt="image">
+              {% endif %}
+              <h1 class="card-title"> {{wall.title}}</h1>
+              <p class="card-text">{{wall.content |linebreaks | truncatewords:50}}</p>
+              <small class="text-muted"> {{wall.timestap}}</small>
+              <p></p>
+              <a href="{% url 'wall_detail' wall.slug %}" style="color: #53abe1;">view</a>
+            </div>
+      </div>
+      {% endfor %}
+      {% else %}
+        <p> Empty</p>
+      {% endif%}
+    </div>
+  </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,89 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="{% static 'style1.css'%}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" charset="utf-8"></script>
+
+    <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+
+    <!-- Font Icon -->
+    <link rel="stylesheet" href="{% static '/fonts/material-icon/css/material-design-iconic-font.min.css' %}">
+
+    <!-- Main css -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'css/bulma.css' %}">
+    <script src="{% static 'js/navbar-burger.js' %}"></script>
+    <style>
+      a.custom-card,
+      a.custom-card:hover {
+        color: inherit;
+        text-decoration: none;
+      }
+    </style>
+</head>
+<body >
+  <nav class="navbar">
+      <div class="navbar-brand">
+          <a href="/" class="navbar-item">
+              <img src="https://blog.weaccept.co/wp-content/themes/accept/assets/logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="112" height="28">
+          </a>
+          <div class="navbar-burger burger" data-target="nav-data">
+              <span></span>
+              <span></span>
+              <span></span>
+          </div>
+      </div>
+          <div class="navbar-menu" id="nav-data">
+            <a href="{% url 'home'%}" class="navbar-item">Home</a>
+            {% if request.user.is_authenticated %}
+            <a href="{% url 'wall'%}" class="navbar-item">Wall</a>
+            <a href="{% url 'wall_create'%}" class="navbar-item">New</a>
+            {% endif %}
+              <div class="navbar-end">
+                  <div class="navbar-item">
+                      <div class="field is-grouped">
+                        {% if request.user.is_authenticated %}
+                        <p class="control">
+                                <span>username : {{request.user}} </span>
+                        </p>
+                        <p class="control">
+                          <a href="{% url 'logout' %}" style="color: #53abe1;">logout</a>
+                        </p>
+
+                        {% else%}
+                          <p class="control">
+                              <a href="{% url 'signup' %}" class="button is-primary" style="background-color: #53ABE1;">
+                                  <span>SIGN UP</span>
+                              </a>
+                          </p>
+                          <p class="control">
+                              <a href="{% url 'login' %}" class="button is-primary"  style="background-color: #53ABE1;">
+                                  <span>LOG IN</span>
+                              </a>
+                          </p>
+                          {% endif%}
+                      </div>
+                  </div>
+          </div>
+      </div>
+
+  </nav>
+
+          {% block content %}
+          {% endblock %}
+
+    <!-- JS -->
+    <script src="{% static  'vendor/jquery/jquery.min.js'%} "></script>
+    <script src="{% static  'js/main.js' %}"></script>
+</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
+</html>

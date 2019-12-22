@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}
+  Wall Delete
+{% endblock %}
+<p> </p>
+<form method="post">
+  {% csrf_token %}
+</form>
+{% block content %}
+<section class="signup" style='margin-bottom: 10px;'>
+    <div class="container" style='max-width: fit-content'>
+        <div class="signup-content">
+            <div class="signup-form">
+                <h2 class="form-title">Are you sure you want to delete post with title {{object}} ?</h2>
+                <form method="POST">
+                  {% csrf_token %}
+                  <button  name="delete"> delete</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

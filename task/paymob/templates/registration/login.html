@@ -1,0 +1,47 @@
+{% extends 'base.html'%}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+
+{% block title %}
+  Login
+{% endblock %}
+
+{% block content %}
+<section class="sign-in">
+    <div class="container" style='max-width: fit-content'>
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="{% static '/images/signin-image.jpg' %}" alt="sing up image"></figure>
+            </div>
+            <div class="signin-form">
+                  <h2 class="form-title" style="font-size: x-large;">Log In</h2>
+                <form method="POST" class="register-form" id="register-form">
+                  {% csrf_token %}
+                  {% for non_field_error in form.non_field_errors %}
+                      <p class="help is-danger">{{ non_field_error }}</p>
+                  {% endfor %}
+                  {% for field in form %}
+                    <div class="form-group">
+                        {{ field.html_name }}
+                        {{ field }}
+                    {% for error in field.errors %}
+                        <p class="help is-danger">{{ error }}</p>
+                    {% endfor %}
+                    </div>
+                    {% endfor %}
+
+                    <div class="form-group form-button">
+                        <input type="submit" name="signup" id="signup" class="form-submit" value="Login"/>
+                    </div>
+                </form>
+                <div class="social-login">
+                    <span class="social-label"></span>
+                    <ul class="socials">
+                        <a href="{% url 'signup' %}" class="signup-image-link">Create an account</a>
+                      </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

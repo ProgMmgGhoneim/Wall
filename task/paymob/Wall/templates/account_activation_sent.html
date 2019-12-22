@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <p>Please confirm your email address to complete the registration. </p>
+  <p>Please click on the link below to confirm your registration:
+
+  http://127.0.0.1:8000{% url 'activate' uidb64=uid token=token %}
+</p>
+{% endblock %}

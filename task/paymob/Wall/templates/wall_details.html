@@ -1,0 +1,31 @@
+{% extends 'base.html'%}
+{% block title %}
+  Walll Details
+{% endblock %}
+
+{% block content %}
+<div class="card text-center">
+          <div class="card-body">
+            {% if wall_info.image %}
+              <img src="{{wall_info.image.url}}" alt="image">
+            {% endif %}
+            <h1 class="card-title">{{wall_info.title}}</h1>
+            <p class="card-text">{{wall_info.content |linebreaks}}</p>
+            <small> {{wall_info.timestap}}</small>
+            <p></p>
+            <p>{{wall_info.updated_data}}</p>
+
+          {% if request.user.is_authenticated %}
+          {% ifnotequal request.user wall_info.author %}
+            <h1 style='color:red'>Unable To Update Or Delete Because It Is Not Your Wall </h1>
+          {% else%}
+            <a href="{% url 'wall_update' wall_info.slug %}"  style="color: #53abe1;">update</a>
+            <a href="{% url 'wall_delete' wall_info.slug %}"  style="color: #53abe1;">delete</a>
+          {% endifnotequal %}
+
+
+    {% endif %}
+    </div>
+  </div>
+
+{% endblock %}
